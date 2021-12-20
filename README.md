@@ -1,4 +1,4 @@
-# Logging
+# Log
  
 Repository for logging
 
@@ -19,7 +19,6 @@ Log logs = new Log(paths);
 log.get_path(); // String path
 logs.get_paths(); // String[] paths
 ```
-***
 **For get all logs use _get_logs()_**
 ```java
 log.get_logs() // String[] logs
@@ -33,7 +32,6 @@ Also, you can log with date and time
 ```java
 log.log(content, true); // dateFormatPattern content
 ```
-***
 **For out in file use _logFile(content)_ or _logFiles(content)_ and _logFile(content, true)_ or _logFiles(content, true)_**
 ```java
 log.logFile(content); // content
