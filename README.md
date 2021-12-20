@@ -2,6 +2,8 @@
  
 Repository for logging
 
+## Creating
+
 **Create logger**
 ```java
 Log log = new Log(path);
@@ -14,6 +16,9 @@ Also, you can set paths
 Log logs = new Log(paths);
 ```
 ***
+
+## Getters
+
 **For get path use _get_path()_ or _get_paths()_**
 ```java
 log.get_path(); // String path
@@ -24,6 +29,9 @@ logs.get_paths(); // String[] paths
 log.get_logs() // String[] logs
 ```
 ***
+
+## Logs
+
 **For out in console use _log(content)_**
 ```java
 log.log(content); // content
@@ -38,6 +46,9 @@ log.logFile(content); // content
 logs.logFiles(content, true); // dateFormatPattern content
 ```
 ***
+
+## Settings
+
 **For set date format pattern use _set_dateFormatPattern()_**<br>
 format:
 * yy - last 2 numbers of year
@@ -54,7 +65,8 @@ format:
 log.set_dateFormatPattern("[yyyy/MM/dd HH:mm:ss] ");
 ```
 ***
-<h1>Example</h1>
+
+## Example
 
 ```java
 package com.Main;
