@@ -3,11 +3,15 @@ package Log;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Log {
     protected String _path;
     protected String[] _paths = new String[64];
+    protected String _dateFormatPattern;
+    protected List<String> _logs = new ArrayList<>();
     public Log(String path) {
         _path = path;
     }
@@ -15,6 +19,26 @@ public class Log {
         _paths = paths;
     }
     public Log() {}
+
+    /**
+     * <h1>Set pattern</h1>
+     * @param pattern
+     * <ul>
+     * <li>yy - last 2 numbers of year</li>
+     * <li>yyyy - full year</li>
+     * <li>MM - month</li>
+     * <li>dd - day</li>
+     * <li>HH - hour</li>
+     * <li>hh - 12-hour time</li>
+     * <li>mm - minutes</li>
+     * <li>ss - seconds</li>
+     * </ul>
+     * <h3>Example:</h3>
+     * [yyyy/MM/dd HH:mm:ss]
+     */
+    public void set_dateFormatPattern(String pattern) {
+        _dateFormatPattern = pattern;
+    }
     /**
      * <h1>Set path</h1>
      * @param path
@@ -30,6 +54,13 @@ public class Log {
         _paths = paths;
     }
 
+    /**
+     * <h1>Get all logs</h1>
+     * @return log
+     */
+    public String[] get_logs() {
+        return _logs.toArray(new String[0]);
+    }
     /**
      * <h1>Get path</h1>
      * @return path
@@ -49,38 +80,49 @@ public class Log {
      * <h1>Print log in console</h1>
      * @param content
      */
-    public static void log(String content) {
+    public void log(String content) {
         System.out.println(content);
+        _logs.add("Console: " + content);
     }
     /**
      * <h1>Print logs in console</h1>
      * @param content
      */
-    public static void log(String[] content) {
+    public void log(String[] content) {
         for (String line:
-                content)
+                content) {
             System.out.println(line);
+            _logs.add("Console: " + line);
+        }
     }
-    public static void log(String content, boolean withDate) {
+    public void log(String content, boolean withDate) {
         if(withDate) {
-            DateFormat dateFormat = new SimpleDateFormat("[yyyy/MM/dd HH:mm:ss] ");
+            DateFormat dateFormat = new SimpleDateFormat(_dateFormatPattern);
             Date date = new Date();
             System.out.println(dateFormat.format(date) + content);
+            _logs.add("Console: " + dateFormat.format(date) + content);
         }
-        else System.out.println(content);
+        else {
+            System.out.println(content);
+            _logs.add("Console: " + content);
+        }
     }
-    public static void log(String[] content, boolean withDate) {
+    public void log(String[] content, boolean withDate) {
         if(withDate) {
-            DateFormat dateFormat = new SimpleDateFormat("[yyyy/MM/dd HH:mm:ss] ");
+            DateFormat dateFormat = new SimpleDateFormat(_dateFormatPattern);
             Date date = new Date();
             for (String line:
-                    content)
+                    content) {
                 System.out.println(dateFormat.format(date) + line);
+                _logs.add("Console: " + dateFormat.format(date) + line);
+            }
         }
         else {
             for (String line :
-                    content)
+                    content) {
                 System.out.println(line);
+                _logs.add("Console: " + line);
+            }
         }
     }
 
@@ -91,6 +133,7 @@ public class Log {
     public void logFile(String content) {
         try(FileWriter fw = new FileWriter(_path, true)) {
             fw.append(content + "\n");
+            _logs.add("File: " + content);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -103,8 +146,10 @@ public class Log {
     public void logFile(String[] content) {
         try(FileWriter fw = new FileWriter(_path, true)) {
             for (String line:
-                    content)
+                    content) {
                 fw.append(line + "\n");
+                _logs.add("File: " + line);
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -112,10 +157,11 @@ public class Log {
     }
     public void logFile(String content, boolean withDate) {
         if(withDate) {
-            DateFormat dateFormat = new SimpleDateFormat("[yyyy/MM/dd HH:mm:ss] ");
+            DateFormat dateFormat = new SimpleDateFormat(_dateFormatPattern);
             Date date = new Date();
             try (FileWriter fw = new FileWriter(_path, true)) {
                 fw.append(dateFormat.format(date) + content + "\n");
+                _logs.add("File: " + dateFormat.format(date) + content);
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -124,6 +170,7 @@ public class Log {
         else {
             try (FileWriter fw = new FileWriter(_path, true)) {
                 fw.append(content + "\n");
+                _logs.add("File: " + content);
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -133,12 +180,14 @@ public class Log {
     public void logFile(String[] content, boolean withDate)
     {
         if(withDate) {
-            DateFormat dateFormat = new SimpleDateFormat("[yyyy/MM/dd HH:mm:ss] ");
+            DateFormat dateFormat = new SimpleDateFormat(_dateFormatPattern);
             Date date = new Date();
             try (FileWriter fw = new FileWriter(_path, true)) {
                 for (String line:
-                        content)
+                        content) {
                     fw.append(dateFormat.format(date) + line + "\n");
+                    _logs.add("File: " + dateFormat.format(date) + content);
+                }
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -147,8 +196,10 @@ public class Log {
         else {
             try (FileWriter fw = new FileWriter(_path, true)) {
                 for (String line:
-                        content)
+                        content) {
                     fw.append(line + "\n");
+                    _logs.add("File: " + content);
+                }
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -163,8 +214,9 @@ public class Log {
     public void logFiles(String content) {
         for (String path:
                 _paths) {
-            try(FileWriter fw = new FileWriter(_path, true)) {
+            try(FileWriter fw = new FileWriter(path, true)) {
                 fw.append(content + "\n");
+                _logs.add("File: " + content);
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -179,10 +231,12 @@ public class Log {
     public void logFiles(String[] content) {
         for (String path:
                 _paths) {
-            try(FileWriter fw = new FileWriter(_path, true)) {
+            try(FileWriter fw = new FileWriter(path, true)) {
                 for (String line:
-                        content)
+                        content) {
                     fw.append(line + "\n");
+                    _logs.add("File: " + content);
+                }
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -193,18 +247,20 @@ public class Log {
         for (String path:
                 _paths) {
             if(withDate) {
-                DateFormat dateFormat = new SimpleDateFormat("[yyyy/MM/dd HH:mm:ss] ");
+                DateFormat dateFormat = new SimpleDateFormat(_dateFormatPattern);
                 Date date = new Date();
-                try (FileWriter fw = new FileWriter(_path, true)) {
+                try (FileWriter fw = new FileWriter(path, true)) {
                     fw.append(dateFormat.format(date) + content + "\n");
+                    _logs.add("File: " + dateFormat.format(date) + content);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             else {
-                try (FileWriter fw = new FileWriter(_path, true)) {
+                try (FileWriter fw = new FileWriter(path, true)) {
                     fw.append(content + "\n");
+                    _logs.add("File: " + content);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -216,22 +272,26 @@ public class Log {
         for (String path:
                 _paths) {
             if(withDate) {
-                DateFormat dateFormat = new SimpleDateFormat("[yyyy/MM/dd HH:mm:ss] ");
+                DateFormat dateFormat = new SimpleDateFormat(_dateFormatPattern);
                 Date date = new Date();
-                try (FileWriter fw = new FileWriter(_path, true)) {
+                try (FileWriter fw = new FileWriter(path, true)) {
                     for (String line:
-                            content)
+                            content) {
                         fw.append(dateFormat.format(date) + line + "\n");
+                        _logs.add("File: " + dateFormat.format(date) + content);
+                    }
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             else {
-                try (FileWriter fw = new FileWriter(_path, true)) {
+                try (FileWriter fw = new FileWriter(path, true)) {
                     for (String line:
-                            content)
+                            content) {
                         fw.append(line + "\n");
+                        _logs.add("File: " + content);
+                    }
                 }
                 catch (Exception e) {
                     e.printStackTrace();
