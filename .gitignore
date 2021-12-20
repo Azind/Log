@@ -1,4 +1,5 @@
 log.iml
 out/
 .idea/
-com.Main/
+com/
+Main/
