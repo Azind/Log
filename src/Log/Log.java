@@ -56,7 +56,7 @@ public class Log {
 
     /**
      * <h1>Get all logs</h1>
-     * @return log
+     * @return logs
      */
     public String[] get_logs() {
         return _logs.toArray(new String[0]);
@@ -136,6 +136,7 @@ public class Log {
             _logs.add("File: " + content);
         }
         catch (Exception e) {
+            _logs.add("ERROR: " + content);
             e.printStackTrace();
         }
     }
@@ -152,6 +153,10 @@ public class Log {
             }
         }
         catch (Exception e) {
+            for (String line:
+                    content) {
+                _logs.add("ERROR: " + line);
+            }
             e.printStackTrace();
         }
     }
@@ -164,6 +169,7 @@ public class Log {
                 _logs.add("File: " + dateFormat.format(date) + content);
             }
             catch (Exception e) {
+                _logs.add("ERROR: " + content);
                 e.printStackTrace();
             }
         }
@@ -173,6 +179,7 @@ public class Log {
                 _logs.add("File: " + content);
             }
             catch (Exception e) {
+                _logs.add("ERROR: " + content);
                 e.printStackTrace();
             }
         }
@@ -190,6 +197,10 @@ public class Log {
                 }
             }
             catch (Exception e) {
+                for (String line:
+                        content) {
+                    _logs.add("ERROR: " + line);
+                }
                 e.printStackTrace();
             }
         }
@@ -198,10 +209,13 @@ public class Log {
                 for (String line:
                         content) {
                     fw.append(line + "\n");
-                    _logs.add("File: " + content);
                 }
             }
             catch (Exception e) {
+                for (String line:
+                        content) {
+                    _logs.add("ERROR: " + line);
+                }
                 e.printStackTrace();
             }
         }
@@ -219,6 +233,7 @@ public class Log {
                 _logs.add("File: " + content);
             }
             catch (Exception e) {
+                _logs.add("ERROR: " + content);
                 e.printStackTrace();
             }
         }
@@ -235,10 +250,13 @@ public class Log {
                 for (String line:
                         content) {
                     fw.append(line + "\n");
-                    _logs.add("File: " + content);
                 }
             }
             catch (Exception e) {
+                for (String line:
+                        content) {
+                    _logs.add("ERROR: " + line);
+                }
                 e.printStackTrace();
             }
         }
@@ -254,6 +272,7 @@ public class Log {
                     _logs.add("File: " + dateFormat.format(date) + content);
                 }
                 catch (Exception e) {
+                    _logs.add("ERROR: " + content);
                     e.printStackTrace();
                 }
             }
@@ -263,6 +282,7 @@ public class Log {
                     _logs.add("File: " + content);
                 }
                 catch (Exception e) {
+                    _logs.add("ERROR: " + content);
                     e.printStackTrace();
                 }
             }
@@ -282,6 +302,10 @@ public class Log {
                     }
                 }
                 catch (Exception e) {
+                    for (String line:
+                            content) {
+                        _logs.add("ERROR: " + line);
+                    }
                     e.printStackTrace();
                 }
             }
@@ -294,6 +318,10 @@ public class Log {
                     }
                 }
                 catch (Exception e) {
+                    for (String line:
+                         content) {
+                        _logs.add("ERROR: " + line);
+                    }
                     e.printStackTrace();
                 }
             }
