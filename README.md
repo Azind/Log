@@ -61,6 +61,7 @@ format:
 * hh - 12-hour time
 * mm - minutes
 * ss - seconds
+* a - AM/PM
 * **Example:**
 * [yyyy/MM/dd HH:mm:ss]
 ```java
