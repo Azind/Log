@@ -2,6 +2,8 @@
  
 Repository for logging
 
+***
+
 ## Creating
 
 **Create logger**
@@ -59,7 +61,7 @@ format:
 * hh - 12-hour time
 * mm - minutes
 * ss - seconds
-* <h3>Example:</h3>
+* **Example:**
 * [yyyy/MM/dd HH:mm:ss]
 ```java
 log.set_dateFormatPattern("[yyyy/MM/dd HH:mm:ss] ");
