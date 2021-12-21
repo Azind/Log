@@ -2,6 +2,8 @@
  
 Repository for logging
 
+***
+
 ## Creating
 
 **Create logger**
