@@ -85,8 +85,8 @@ public class Log {
      * @param content String
      */
     public void log(String content) {
-        System.out.println(COLOR_GREEN + content + COLOR_RESET);
-        _logs.add("Console: " + content);
+        System.out.println(content + COLOR_RESET);
+        _logs.add(COLOR_GREEN + "Console: " + content);
     }
     /**
      * <h4>Print logs in console</h4>
@@ -95,8 +95,8 @@ public class Log {
     public void log(String[] content) {
         for (String line :
                 content) {
-            System.out.println(COLOR_GREEN + line + COLOR_RESET);
-            _logs.add("Console: " + line);
+            System.out.println(line + COLOR_RESET);
+            _logs.add(COLOR_GREEN + "Console: " + line);
         }
     }
     /**
@@ -108,11 +108,11 @@ public class Log {
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat(_dateFormatPattern);
         if (withDate) {
-            System.out.println(COLOR_GREEN + dateFormat.format(date) + content + COLOR_RESET);
-            _logs.add("Console: " + dateFormat.format(date) + content);
+            System.out.println(dateFormat.format(date) + content + COLOR_RESET);
+            _logs.add(COLOR_GREEN + "Console: " + dateFormat.format(date) + content);
         } else {
-            System.out.println(COLOR_GREEN + content + COLOR_RESET);
-            _logs.add("Console: " + content);
+            System.out.println(content + COLOR_RESET);
+            _logs.add(COLOR_GREEN + "Console: " + content);
         }
     }
     /**
@@ -126,14 +126,14 @@ public class Log {
         if (withDate) {
             for (String line :
                     content) {
-                System.out.println(COLOR_GREEN + dateFormat.format(date) + line + COLOR_RESET);
-                _logs.add("Console: " + dateFormat.format(date) + line);
+                System.out.println(dateFormat.format(date) + line + COLOR_RESET);
+                _logs.add(COLOR_GREEN + "Console: " + dateFormat.format(date) + line);
             }
         } else {
             for (String line :
                     content) {
-                System.out.println(COLOR_GREEN + line + COLOR_RESET);
-                _logs.add("Console: " + line);
+                System.out.println(line + COLOR_RESET);
+                _logs.add(COLOR_GREEN + "Console: " + line);
             }
         }
     }
@@ -146,7 +146,7 @@ public class Log {
         DateFormat dateFormat = new SimpleDateFormat(_dateFormatPattern);
         try (FileWriter fw = new FileWriter(_path, true)) {
             fw.append(content).append("\n");
-            _logs.add("File: " + content);
+            _logs.add(COLOR_GREEN + "File: " + content);
         } catch (Exception e) {
             _logs.add(COLOR_RED + "ERROR: " + dateFormat.format(date) + content + COLOR_RESET);
             e.printStackTrace();
@@ -163,7 +163,7 @@ public class Log {
             for (String line :
                     content) {
                 fw.append(line).append("\n");
-                _logs.add("File: " + line);
+                _logs.add(COLOR_GREEN + "File: " + line);
             }
         } catch (Exception e) {
             for (String line :
@@ -184,11 +184,11 @@ public class Log {
         try(FileWriter fw = new FileWriter(_path, true)) {
             if (withDate) {
                 fw.append(dateFormat.format(date)).append(content).append("\n");
-                _logs.add("File: " + dateFormat.format(date) + content);
+                _logs.add(COLOR_GREEN + "File: " + dateFormat.format(date) + content);
                 _logs.add(COLOR_RED + "ERROR: " + dateFormat.format(date) + content + COLOR_RESET);
             } else {
                 fw.append(content).append("\n");
-                _logs.add("File: " + content);
+                _logs.add(COLOR_GREEN + "File: " + content);
             }
         }
         catch (Exception e) {
@@ -209,7 +209,7 @@ public class Log {
                 for (String line :
                         content) {
                     fw.append(dateFormat.format(date)).append(line).append("\n");
-                    _logs.add("File: " + dateFormat.format(date) + line);
+                    _logs.add(COLOR_GREEN + "File: " + dateFormat.format(date) + line);
                 }
             } else {
                 for (String line :
@@ -236,7 +236,7 @@ public class Log {
                 _paths) {
             try (FileWriter fw = new FileWriter(path, true)) {
                 fw.append(content).append("\n");
-                _logs.add("File: " + content);
+                _logs.add(COLOR_GREEN + "File: " + content);
             } catch (Exception e) {
                 _logs.add(COLOR_RED + "ERROR: " + dateFormat.format(date) + content + COLOR_RESET);
                 e.printStackTrace();
@@ -279,10 +279,10 @@ public class Log {
             try(FileWriter fw = new FileWriter(path, true)) {
                 if (withDate) {
                     fw.append(dateFormat.format(date)).append(content).append("\n");
-                    _logs.add("File: " + dateFormat.format(date) + content);
+                    _logs.add(COLOR_GREEN + "File: " + dateFormat.format(date) + content);
                 } else {
                     fw.append(content).append("\n");
-                    _logs.add("File: " + content);
+                    _logs.add(COLOR_GREEN + "File: " + content);
                     _logs.add(COLOR_RED + "ERROR: " + dateFormat.format(date) + content + COLOR_RESET);
                 }
             }
@@ -307,13 +307,13 @@ public class Log {
                     for (String line :
                             content) {
                         fw.append(dateFormat.format(date)).append(line).append("\n");
-                        _logs.add("File: " + dateFormat.format(date) + line);
+                        _logs.add(COLOR_GREEN + "File: " + dateFormat.format(date) + line);
                     }
                 } else {
                     for (String line :
                             content) {
                         fw.append(line).append("\n");
-                        _logs.add("File: " + line);
+                        _logs.add(COLOR_GREEN + "File: " + line);
                     }
                 }
             } catch (Exception e) {
