@@ -1,4 +1,4 @@
-package Log;
+package log.Log;
 
 import java.io.FileWriter;
 import java.text.DateFormat;
